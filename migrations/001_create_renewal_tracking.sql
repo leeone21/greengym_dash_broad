@@ -1,4 +1,4 @@
--- 재등록 관리 상태 저장 테이블
+-- 재등록 관리 상태 저장
 CREATE TABLE IF NOT EXISTS renewal_tracking (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   member_name TEXT NOT NULL,
@@ -18,10 +18,8 @@ CREATE TABLE IF NOT EXISTS renewal_tracking (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
--- RLS 활성화
 ALTER TABLE renewal_tracking ENABLE ROW LEVEL SECURITY;
 
--- 트레이너만 접근 허용
 CREATE POLICY "트레이너만 접근" ON renewal_tracking
   USING (
     EXISTS (

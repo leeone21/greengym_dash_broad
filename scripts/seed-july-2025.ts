@@ -22,7 +22,7 @@ const julyMembers = [
 async function seed() {
   console.log('Seeding July 2025 members...')
 
-  const rows = julyMembers.map((m) => ({
+  const rows = julyMembers.map(m => ({
     ...m,
     target_month: '2025-07',
     contacted_kakao: false,

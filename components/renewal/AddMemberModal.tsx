@@ -30,8 +30,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
       setError('이름과 만료일은 필수입니다.')
       return
     }
-    setLoading(true)
 
+    setLoading(true)
     const { data, error: insertError } = await supabase
       .from('renewal_tracking')
       .insert({
@@ -60,12 +60,6 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
     onClose()
   }
 
-  const inputStyle = {
-    backgroundColor: '#1A1D27',
-    border: '1px solid #2A2D3E',
-    color: '#FFFFFF',
-  }
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: '#00000080' }}>
       <div className="w-full max-w-md rounded-2xl p-6" style={{ backgroundColor: '#1E2130', border: '1px solid #2A2D3E' }}>
@@ -85,8 +79,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
               type="text"
               value={form.member_name}
               onChange={(e) => setForm({ ...form, member_name: e.target.value })}
-              className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
-              style={inputStyle}
+              className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none"
+              style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
               placeholder="홍길동"
             />
           </div>
@@ -96,10 +90,10 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
             <select
               value={form.program}
               onChange={(e) => setForm({ ...form, program: e.target.value as Program })}
-              className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
-              style={inputStyle}
+              className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none"
+              style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
             >
-              {PROGRAMS.map((p) => <option key={p} value={p}>{p}</option>)}
+              {PROGRAMS.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>
 
@@ -110,8 +104,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
                 type="date"
                 value={form.expire_date}
                 onChange={(e) => setForm({ ...form, expire_date: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
-                style={inputStyle}
+                className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none"
+                style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
               />
             </div>
             <div>
@@ -120,8 +114,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
                 type="date"
                 value={form.last_visit_date}
                 onChange={(e) => setForm({ ...form, last_visit_date: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
-                style={inputStyle}
+                className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none"
+                style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
               />
             </div>
           </div>
@@ -133,8 +127,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
               min={0}
               value={form.total_visits}
               onChange={(e) => setForm({ ...form, total_visits: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
-              style={inputStyle}
+              className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none"
+              style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
             />
           </div>
 
@@ -144,18 +138,20 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
               value={form.memo}
               onChange={(e) => setForm({ ...form, memo: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2.5 rounded-lg text-sm outline-none resize-none"
-              style={inputStyle}
+              className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none resize-none"
+              style={{ backgroundColor: '#1A1D27', border: '1px solid #2A2D3E' }}
             />
           </div>
 
-          {error && <p className="text-xs" style={{ color: '#FF4D4D' }}>{error}</p>}
+          {error && (
+            <p className="text-xs" style={{ color: '#FF4D4D' }}>{error}</p>
+          )}
 
           <div className="flex gap-3 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 rounded-lg text-sm font-medium"
+              className="flex-1 py-2.5 rounded-lg text-sm font-medium transition-all"
               style={{ backgroundColor: '#1A1D27', color: '#8B8FA8', border: '1px solid #2A2D3E' }}
             >
               취소
@@ -163,8 +159,8 @@ export default function AddMemberModal({ onClose, onAdded, targetMonth }: AddMem
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-black"
-              style={{ backgroundColor: '#00E5A0', opacity: loading ? 0.7 : 1 }}
+              className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-black transition-all"
+              style={{ backgroundColor: '#00E5A0' }}
             >
               {loading ? '저장 중...' : '추가하기'}
             </button>
