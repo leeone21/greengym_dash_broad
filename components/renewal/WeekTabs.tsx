@@ -2,10 +2,9 @@ interface WeekTabsProps {
   activeTab: number
   onTabChange: (tab: number) => void
   counts: Record<number, number>
-  total: number
 }
 
-export default function WeekTabs({ activeTab, onTabChange, counts, total }: WeekTabsProps) {
+export default function WeekTabs({ activeTab, onTabChange, counts }: WeekTabsProps) {
   const tabs = [
     { id: 0, label: '전체' },
     { id: 1, label: '1주차' },
@@ -18,14 +17,14 @@ export default function WeekTabs({ activeTab, onTabChange, counts, total }: Week
     <div className="flex gap-2">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id
-        const count = tab.id === 0 ? total : (counts[tab.id] ?? 0)
+        const count = counts[tab.id] ?? 0
         return (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
             style={{
-              backgroundColor: isActive ? '#00E5A015' : '#1E2130',
+              backgroundColor: isActive ? '#00E5A020' : '#1E2130',
               color: isActive ? '#00E5A0' : '#8B8FA8',
               border: `1px solid ${isActive ? '#00E5A040' : '#2A2D3E'}`,
             }}
@@ -38,7 +37,7 @@ export default function WeekTabs({ activeTab, onTabChange, counts, total }: Week
                 color: isActive ? '#00E5A0' : '#8B8FA8',
               }}
             >
-              {count}
+              {tab.id === 0 ? Object.values(counts).reduce((a, b) => a + b, 0) : count}
             </span>
           </button>
         )
